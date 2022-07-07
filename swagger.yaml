@@ -1,0 +1,88 @@
+openapi: 3.0.1
+info:
+  title: Swagger Petstore
+  description: >-
+              Hello World!
+  version: 1.0.0
+servers:
+  - url: https://std21006.com
+tags:
+  - name: pet
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: Courses
+paths:
+  /students:
+    get:
+      tags:
+        - pet
+      summary: Get new student
+      description: Get all students with details
+      operationId: addPet
+      parameters:
+        - name: page
+          in : query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+        - name: page_size
+          in : query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lists of student
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createStudent'
+        '400':
+          description: Bad requests
+  /students/ :
+    post:
+      tags:
+        - pet
+      summary: create new student
+      description: Create new Student from array
+      operationId : add
+      requestBody:
+        description : Student to be created 
+        content:
+          application/json :
+            schema :
+              type: array
+              items:
+                $ref: '#/components/schemas/students'
+        required: true
+      responses:
+        '200':
+          description: Lists of student
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createStudent'
+components:
+  schemas:
+    students :
+      type : object
+      properties :
+        name :
+          type : string
+    createStudent:
+      type: object
+      properties :
+        id:
+          type: integer
+        name : 
+          type : string
